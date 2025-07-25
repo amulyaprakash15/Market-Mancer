@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MarketMancer - Advisor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark">
+  <div class="container">
+    <h2 class="title">💬 Ask Market Advisor</h2>
+
+    <form action="/ask" method="POST" class="form-box">
+      <textarea name="question" placeholder="Ask your investment question here..." required></textarea>
+      <div class="btn-row">
+        <button type="submit">Ask</button>
+        <button type="button" onclick="startVoiceInput()">🎙️ Speak</button>
+      </div>
+    </form>
+
+    {% if answer %}
+    <div class="card bot-response">
+      <h3>🧠 Advisor's Reply</h3>
+      <p>{{ answer }}</p>
+      <button onclick="copyToClipboard()">📋 Copy</button>
+    </div>
+    {% endif %}
+
+    <div class="back-link">
+      <a href="/">← Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+    function copyToClipboard() {
+      navigator.clipboard.writeText("{{ answer }}");
+      alert("Copied to clipboard!");
+    }
+
+    function startVoiceInput() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.onresult = function (event) {
+        document.querySelector('textarea').value = event.results[0][0].transcript;
+      };
+      recognition.start();
+    }
+  </script>
+</body>
+</html>

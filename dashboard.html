@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ ticker }} - MarketMancer Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark">
+  <div class="container">
+    <h2 class="title">📊 {{ ticker }} Dashboard</h2>
+
+    <div class="card-container">
+      <div class="card">
+        <h3>📈 Predicted Price</h3>
+        <p class="big-text">₹{{ prediction.price }}</p>
+        <p>Confidence: {{ prediction.confidence }}%</p>
+        <span class="tag {{ prediction.tag }}">{{ prediction.tag }}</span>
+      </div>
+
+      <div class="card sentiment">
+        <h3>🧠 Sentiment Summary</h3>
+        <p>👍 Positive: {{ sentiment_summary.positive }}%</p>
+        <p>😐 Neutral: {{ sentiment_summary.neutral }}%</p>
+        <p>👎 Negative: {{ sentiment_summary.negative }}%</p>
+      </div>
+    </div>
+
+    <div class="news-section">
+      <h3>📰 Latest Headlines</h3>
+      <ul>
+        {% for news in news_list %}
+          <li><a href="{{ news.url }}" target="_blank">{{ news.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="back-link">
+      <a href="/">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

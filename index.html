@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MarketMancer – Your AI Investment Oracle</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark">
+  <div class="container">
+    <h1 class="title">📈 MarketMancer</h1>
+    <p class="subtitle">Predict prices, analyze news, and get smart investing insights.</p>
+
+    <form action="/dashboard" method="POST" class="form-box">
+      <input type="text" name="ticker" placeholder="Enter Stock Symbol (e.g. TSLA)" required>
+      <button type="submit">🔍 Analyze</button>
+    </form>
+
+    <div class="advisor-link">
+      <a href="/advisor">💬 Talk to Market Advisor</a>
+    </div>
+  </div>
+</body>
+</html>
